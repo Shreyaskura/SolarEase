@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SolarEase - Simple Solar Solution</title>
+    <style>
+        /* Basic styles for the whole page */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Centering the main content */
+        #container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header/Navigation styles */
+        #header {
+            background-color: #2e8b57; /* Sea Green */
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        #header h1 {
+            margin: 0;
+            font-size: 2em;
+        }
+
+        #nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+        }
+
+        /* Section styles */
+        .section {
+            background-color: white;
+            padding: 30px;
+            margin-bottom: 25px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .section h2 {
+            color: #2e8b57;
+            border-bottom: 2px solid #a3d9b0;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* The 3 Problem Areas */
+        #problems-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            text-align: center;
+        }
+        
+        .problem-card {
+            background-color: #e0fae7; /* Light Green */
+            padding: 20px;
+            border-radius: 6px;
+        }
+
+        .problem-card h3 {
+            color: #1e7040;
+        }
+
+        /* Calculator Styles */
+        #calculator-box {
+            background-color: #1e7040;
+            color: white;
+            padding: 30px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        #calculator-box input, #calculator-box button {
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 4px;
+            border: none;
+        }
+
+        #result-display {
+            background-color: #4CAF50; /* Brighter Green */
+            padding: 15px;
+            border-radius: 6px;
+            text-align: center;
+        }
+        
+        #result-display p {
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+        
+        #monthly-savings-amount {
+            font-size: 2em;
+            color: #ffcc00; /* Yellow for pop */
+        }
+        
+        /* Form/Consultation Button */
+        .button {
+            background-color: #ffcc00;
+            color: #333;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+        
+        .button:hover {
+            background-color: #e6b800;
+        }
+
+        /* Process Timeline Styles */
+        #timeline {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-top: 30px;
+            position: relative;
+        }
+        #timeline::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 10%;
+            right: 10%;
+            height: 2px;
+            background-color: #ccc;
+            z-index: 0;
+        }
+        .timeline-step {
+            width: 22%;
+            text-align: center;
+            position: relative;
+            padding-top: 50px;
+        }
+        .timeline-step .circle {
+            width: 40px;
+            height: 40px;
+            background-color: #2e8b57;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1;
+        }
+        .timeline-step h4 {
+            color: #1e7040;
+            margin-top: 10px;
+            margin-bottom: 5px;
+        }
+        .timeline-step p {
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        /* Support/Guardian styles */
+        #support-info {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+        #support-image {
+            width: 40%;
+            border: 2px solid #2e8b57;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 0.9em;
+            color: #4CAF50;
+        }
+        #support-text {
+            width: 60%;
+        }
+
+        /* Footer styles */
+        #footer {
+            background-color: #222;
+            color: #aaa;
+            text-align: center;
+            padding: 15px 0;
+            font-size: 0.8em;
+            margin-top: 30px;
+        }
+
+        /* Mobile Adjustments (Basic Responsiveness) */
+        @media (max-width: 700px) {
+            #problems-grid {
+                grid-template-columns: 1fr;
+            }
+            #calculator-box {
+                flex-direction: column;
+            }
+            #timeline {
+                flex-direction: column;
+                align-items: center;
+            }
+            #timeline::before {
+                top: 0;
+                left: 50%;
+                width: 2px;
+                height: 100%;
+            }
+            .timeline-step {
+                width: 80%;
+                padding-top: 20px;
+                padding-bottom: 20px;
+            }
+            .timeline-step .circle {
+                top: 20px;
+                left: 50%;
+            }
+            #support-info {
+                flex-direction: column;
+            }
+            #support-image, #support-text {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="header">
+        <h1>SolarEase</h1>
+        <div id="nav">
+            <a href="#problems">Our Solution</a>
+            <a href="#tracks">Who Are You?</a>
+            <a href="#calculator">Calculator</a>
+            <a href="#process">Process</a>
+            <a href="#support">Support</a>
+            <a href="#consult">Get Started</a>
+        </div>
+    </div>
+
+    <div id="container">
+
+        <!-- Hero/Introduction -->
+        <div class="section">
+            <h2 style="text-align: left;">Stop Paying High Electric Bills Today!</h2>
+            <p><strong>The Problem:</strong> High upfront costs, confusing government subsidies, and terrible support after installation are slowing down the shift to solar. Households and small businesses get discouraged.</p>
+            <p><strong>Our Mission:</strong> SolarEase makes solar adoption easy by removing all three roadblocks. We handle the paperwork, offer zero-down payment options, and promise 25 years of guaranteed support.</p>
+            <p style="text-align: center;"><button class="button" onclick="document.getElementById('calculator').scrollIntoView({behavior: 'smooth'});">Calculate My Instant Savings!</button></p>
+        </div>
+
+        <!-- Problems & Solutions Section -->
+        <div id="problems" class="section">
+            <h2>The 3 Reasons People Avoid Solar (And How We Fix Them)</h2>
+            
+            <div id="problems-grid">
+                
+                <div class="problem-card">
+                    <h3>Barrier 1: High Upfront Costs</h3>
+                    <p>It costs thousands of dollars just to start. Most families can't afford the initial investment.</p>
+                    <p style="color: #4CAF50;"><strong>The Fix:</strong> We only offer $0-Down Financing. Your solar loan payment is guaranteed to be less than your old electric bill.</p>
+                </div>
+
+                <div class="problem-card">
+                    <h3>Barrier 2: Confusing Subsidies</h3>
+                    <p>The government offers great rebates, but the forms are complicated and applications take months.</p>
+                    <p style="color: #4CAF50;"><strong>The Fix:</strong> Our "Paperwork Concierge" handles all subsidy and permit applications. You sign one form, we do the rest.</p>
+                </div>
+
+                <div class="problem-card">
+                    <h3>Barrier 3: Poor After-Sales Support</h3>
+                    <p>Installers disappear after the check clears. If a panel breaks, you're stuck waiting weeks.</p>
+                    <p style="color: #4CAF50;"><strong>The Fix:</strong> 25-Year Guarantee. We remotely monitor your panels and dispatch repair teams before you even notice a fault.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dual Tracks Section -->
+        <div id="tracks" class="section">
+            <h2>Solutions Tailored for You</h2>
+            <div style="display: flex; gap: 20px; text-align: center;">
+                <div class="problem-card" style="flex: 1;">
+                    <h3>Homeowners</h3>
+                    <p>Lower your energy bill, increase your home value, and gain energy independence. Our focus is long-term family savings.</p>
+                    <p style="font-weight: bold; color: #1e7040;">Path: Zero-Down Loan & Federal Tax Credit Filing.</p>
+                </div>
+                <div class="problem-card" style="flex: 1;">
+                    <h3>Small Businesses</h3>
+                    <p>Drastically cut operating expenses and meet ESG targets. Utilize commercial rebates and accelerated depreciation benefits.</p>
+                    <p style="font-weight: bold; color: #1e7040;">Path: Commercial PPA (Power Purchase Agreement) & State Incentive Maximization.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Calculator Section -->
+        <div id="calculator" class="section">
+            <h2>Simple Savings Calculator</h2>
+            <div id="calculator-box">
+                <div>
+                    <label for="billInput">Enter Average Monthly Electric Bill ($):</label><br>
+                    <input type="number" id="billInput" value="150">
+                    <button onclick="calculateSavings()" style="background-color: #2e8b57; color: white;">Calculate</button>
+                </div>
+
+                <div id="result-display">
+                    <p>Monthly Savings Estimate:</p>
+                    <div id="monthly-savings-amount">$45</div>
+                    <p style="font-size: 0.9em; font-weight: normal;">(This assumes typical 30% savings over old bill)</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Bureaucracy Buster Timeline (New Section) -->
+        <div id="process" class="section">
+            <h2>The "Bureaucracy Buster" Timeline</h2>
+            <p style="text-align: center; margin-bottom: 40px; font-weight: bold;">We turn months of confusing paperwork into 4 simple steps for you.</p>
+
+            <div id="timeline">
+                <div class="timeline-step">
+                    <div class="circle">1</div>
+                    <h4>Your Quote</h4>
+                    <p>You approve our satellite-based quote. (5 mins of your time)</p>
+                </div>
+                <div class="timeline-step">
+                    <div class="circle">2</div>
+                    <h4>The Filing</h4>
+                    <p>We apply for all local permits and federal/state subsidies. (0 mins of your time)</p>
+                </div>
+                <div class="timeline-step">
+                    <div class="circle">3</div>
+                    <h4>The Install</h4>
+                    <p>Our team installs the panels and connects the system. (1 day)</p>
+                </div>
+                <div class="timeline-step">
+                    <div class="circle">4</div>
+                    <h4>Green Power</h4>
+                    <p>You start generating power and receiving your subsidy check. (Zero work)</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Guardian Support Hub (New Section) -->
+        <div id="support" class="section">
+            <h2>The Guardian™ Lifetime Support</h2>
+            <div id="support-info">
+                <div id="support-text">
+                    <p>Poor after-sales support is the #1 complaint in solar. We fixed it with the Guardian™ system.</p>
+                    <ul style="list-style-type: disc; margin-left: 20px; margin-top: 15px;">
+                        <li><strong>Proactive Fault Detection:</strong> Our software monitors every panel for output drops.</li>
+                        <li><strong>Instant Alert:</strong> We know about a problem instantly—usually before you notice a change in your bill.</li>
+                        <li><strong>Guaranteed Fix:</strong> We dispatch a technician within 48 hours. No waiting on hold, no excuses.</li>
+                    </ul>
+                    <p style="margin-top: 15px;">Your peace of mind is our 25-year promise. Your system is always performing at peak efficiency.</p>
+                </div>
+                <div id="support-image">
+                    <!-- Placeholder for the "Guardian App Interface" -->
+                    [Image of a solar panel remote monitoring dashboard]
+                    <p>Mockup of the Guardian™ Monitoring App</p>
+                    <p style="font-weight: bold; color: green;">System Health: Optimal (99.8%)</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Form Section -->
+        <div id="consult" class="section">
+            <h2>Ready to Go Solar?</h2>
+            <p>Fill out this quick form for a free, no-obligation satellite assessment of your roof!</p>
+            <form id="contact-form" style="max-width: 400px; margin: 0 auto; padding: 20px; border: 1px solid #ccc; border-radius: 5px;">
+                <label for="name">Your Name:</label><br>
+                <input type="text" id="name" required style="width: 100%; padding: 8px; margin-bottom: 10px; border: 1px solid #ccc;"><br>
+                
+                <label for="address">Installation Address:</label><br>
+                <input type="text" id="address" required style="width: 100%; padding: 8px; margin-bottom: 10px; border: 1px solid #ccc;"><br>
+                
+                <label for="email">Email:</label><br>
+                <input type="email" id="email" required style="width: 100%; padding: 8px; margin-bottom: 15px; border: 1px solid #ccc;"><br>
+                
+                <button type="submit" class="button" style="width: 100%; margin-top: 0;">Submit for Quote</button>
+            </form>
+            <div id="message-box" style="text-align: center; margin-top: 20px; color: #ff0000; font-weight: bold; display: none;"></div>
+        </div>
+    </div>
+    
+    <div id="footer">
+        <p>&copy; 2024 SolarEase Startup. All rights reserved. Go Green!</p>
+    </div>
+
+    <script>
+        // Simple global function for calculation
+        function calculateSavings() {
+            var billInput = document.getElementById('billInput');
+            var bill = parseFloat(billInput.value);
+            var savingsElement = document.getElementById('monthly-savings-amount');
+
+            // Check if input is a valid number
+            if (isNaN(bill) || bill <= 0) {
+                savingsElement.innerHTML = "$0";
+                return;
+            }
+
+            // Simple calculation: Assume new payment is 70% of old bill
+            var newPayment = bill * 0.70;
+            var monthlySavings = bill - newPayment;
+
+            // Update the display
+            savingsElement.innerHTML = "$" + monthlySavings.toFixed(0);
+        }
+        
+        // Form submission handler
+        document.getElementById('contact-form').onsubmit = function(event) {
+            event.preventDefault(); // Stop the form from refreshing the page
+            
+            var messageBox = document.getElementById('message-box');
+            
+            // Display a success message
+            messageBox.style.display = 'block';
+            messageBox.style.backgroundColor = '#d4edda';
+            messageBox.style.color = '#155724';
+            messageBox.style.padding = '10px';
+            messageBox.style.borderRadius = '5px';
+            messageBox.innerHTML = 'SUCCESS! Your info has been sent. We will email your personalized solar plan soon!';
+            
+            // Clear the form fields (optional but good practice)
+            document.getElementById('name').value = '';
+            document.getElementById('address').value = '';
+            document.getElementById('email').value = '';
+        };
+
+        // Run the calculation once when the page loads
+        calculateSavings(); 
+    </script>
+</body>
+</html>
